@@ -1,3 +1,9 @@
+## 0.0.3
+
+* **Code Quality** - Final formatting fixes
+* Fixed remaining Dart formatting issues for perfect static analysis score
+* Verified GitHub issues URL accessibility
+
 ## 0.0.2
 
 * **Documentation & Examples** - Improved pub.dev score
