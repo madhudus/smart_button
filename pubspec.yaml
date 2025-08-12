@@ -1,9 +1,9 @@
 name: smart_button
 description: "Flutter buttons with built-in internet connectivity checking. Automatically prevents actions and shows user feedback when offline."
 version: 0.0.1
-homepage: https://github.com/madhusudhana/smart_button
-repository: https://github.com/madhusudhana/smart_button
-issue_tracker: https://github.com/madhusudhana/smart_button/issues
+homepage: https://github.com/madhudus/smart_button
+repository: https://github.com/madhudus/smart_button
+issue_tracker: https://github.com/madhudus/smart_button/issues
 
 environment:
   sdk: ^3.8.1
@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   connectivity_plus: ^6.1.5
 
 dev_dependencies:
