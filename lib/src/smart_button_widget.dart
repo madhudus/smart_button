@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'offline_feedback_type.dart';
 
+/// A smart elevated button that checks internet connectivity before executing actions.
+///
+/// This button wraps Flutter's [ElevatedButton] and adds automatic connectivity
+/// checking. When pressed while offline, it shows configurable feedback instead
+/// of executing the [onPressed] callback.
 class SmartButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
@@ -13,12 +18,16 @@ class SmartButton extends StatelessWidget {
   final Clip clipBehavior;
   final WidgetStatesController? statesController;
   final Widget child;
-  
+
   final OfflineFeedbackType feedbackType;
   final String offlineMessage;
   final String offlineTitle;
   final VoidCallback? onOfflineAction;
 
+  /// Creates a smart elevated button.
+  ///
+  /// The [onPressed] callback is only executed when internet connectivity is available.
+  /// When offline, shows feedback based on [feedbackType] and calls [onOfflineAction] if provided.
   const SmartButton({
     super.key,
     required this.onPressed,
@@ -32,7 +41,8 @@ class SmartButton extends StatelessWidget {
     this.statesController,
     required this.child,
     this.feedbackType = OfflineFeedbackType.dialog,
-    this.offlineMessage = 'No internet connection available. Please check your connection and try again.',
+    this.offlineMessage =
+        'No internet connection available. Please check your connection and try again.',
     this.offlineTitle = 'Connection Error',
     this.onOfflineAction,
   });
@@ -55,7 +65,7 @@ class SmartButton extends StatelessWidget {
 
   Future<void> _handlePress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onPressed?.call();
     } else {
@@ -68,7 +78,7 @@ class SmartButton extends StatelessWidget {
 
   Future<void> _handleLongPress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onLongPress?.call();
     } else {
@@ -133,6 +143,11 @@ class SmartButton extends StatelessWidget {
   }
 }
 
+/// A smart text button that checks internet connectivity before executing actions.
+///
+/// This button wraps Flutter's [TextButton] and adds automatic connectivity
+/// checking. When pressed while offline, it shows configurable feedback instead
+/// of executing the [onPressed] callback.
 class SmartTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
@@ -144,12 +159,16 @@ class SmartTextButton extends StatelessWidget {
   final Clip clipBehavior;
   final WidgetStatesController? statesController;
   final Widget child;
-  
+
   final OfflineFeedbackType feedbackType;
   final String offlineMessage;
   final String offlineTitle;
   final VoidCallback? onOfflineAction;
 
+  /// Creates a smart text button.
+  ///
+  /// The [onPressed] callback is only executed when internet connectivity is available.
+  /// When offline, shows feedback based on [feedbackType] and calls [onOfflineAction] if provided.
   const SmartTextButton({
     super.key,
     required this.onPressed,
@@ -163,7 +182,8 @@ class SmartTextButton extends StatelessWidget {
     this.statesController,
     required this.child,
     this.feedbackType = OfflineFeedbackType.dialog,
-    this.offlineMessage = 'No internet connection available. Please check your connection and try again.',
+    this.offlineMessage =
+        'No internet connection available. Please check your connection and try again.',
     this.offlineTitle = 'Connection Error',
     this.onOfflineAction,
   });
@@ -186,7 +206,7 @@ class SmartTextButton extends StatelessWidget {
 
   Future<void> _handlePress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onPressed?.call();
     } else {
@@ -199,7 +219,7 @@ class SmartTextButton extends StatelessWidget {
 
   Future<void> _handleLongPress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onLongPress?.call();
     } else {
@@ -264,6 +284,11 @@ class SmartTextButton extends StatelessWidget {
   }
 }
 
+/// A smart outlined button that checks internet connectivity before executing actions.
+///
+/// This button wraps Flutter's [OutlinedButton] and adds automatic connectivity
+/// checking. When pressed while offline, it shows configurable feedback instead
+/// of executing the [onPressed] callback.
 class SmartOutlinedButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
@@ -275,12 +300,16 @@ class SmartOutlinedButton extends StatelessWidget {
   final Clip clipBehavior;
   final WidgetStatesController? statesController;
   final Widget child;
-  
+
   final OfflineFeedbackType feedbackType;
   final String offlineMessage;
   final String offlineTitle;
   final VoidCallback? onOfflineAction;
 
+  /// Creates a smart outlined button.
+  ///
+  /// The [onPressed] callback is only executed when internet connectivity is available.
+  /// When offline, shows feedback based on [feedbackType] and calls [onOfflineAction] if provided.
   const SmartOutlinedButton({
     super.key,
     required this.onPressed,
@@ -294,7 +323,8 @@ class SmartOutlinedButton extends StatelessWidget {
     this.statesController,
     required this.child,
     this.feedbackType = OfflineFeedbackType.dialog,
-    this.offlineMessage = 'No internet connection available. Please check your connection and try again.',
+    this.offlineMessage =
+        'No internet connection available. Please check your connection and try again.',
     this.offlineTitle = 'Connection Error',
     this.onOfflineAction,
   });
@@ -317,7 +347,7 @@ class SmartOutlinedButton extends StatelessWidget {
 
   Future<void> _handlePress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onPressed?.call();
     } else {
@@ -330,7 +360,7 @@ class SmartOutlinedButton extends StatelessWidget {
 
   Future<void> _handleLongPress(BuildContext context) async {
     final isConnected = await _checkConnectivity();
-    
+
     if (isConnected) {
       onLongPress?.call();
     } else {

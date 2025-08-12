@@ -1,3 +1,11 @@
+## 0.0.2
+
+* **Documentation & Examples** - Improved pub.dev score
+* Added comprehensive dartdoc comments for all public API elements
+* Created example app demonstrating all smart button types and feedback options
+* Fixed Dart formatting issues
+* Improved code documentation and API discoverability
+
 ## 0.0.1
 
 * **Initial Release** - Smart Button package for Flutter
