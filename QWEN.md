@@ -47,10 +47,10 @@ test/
 - **Package Type**: Flutter package (not a plugin - no platform-specific code)
 - **Core Widget**: SmartButton - extends standard Flutter button with connectivity awareness
 - **Key Features**:
-  - All standard Flutter button properties (onPressed, style, child, etc.)
-  - Built-in internet connectivity checking before action execution
-  - Configurable offline feedback via adaptive alert dialog or snack bar
-  - Prevents onPressed/onTap execution when offline
+    - All standard Flutter button properties (onPressed, style, child, etc.)
+    - Built-in internet connectivity checking before action execution
+    - Configurable offline feedback via adaptive alert dialog or snack bar
+    - Prevents onPressed/onTap execution when offline
 - **Dependencies**: Will need connectivity checking package (e.g., connectivity_plus)
 - **Testing Strategy**: Unit tests using flutter_test framework
 - **Linting**: Uses flutter_lints package for code quality enforcement
