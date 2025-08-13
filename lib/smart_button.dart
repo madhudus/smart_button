@@ -1,5 +1,6 @@
 export 'src/smart_button_widget.dart';
 export 'src/offline_feedback_type.dart';
+export 'src/base_smart_button.dart';
 
 /// SmartButton widgets with built-in connectivity checking.
 ///
@@ -25,5 +26,18 @@ export 'src/offline_feedback_type.dart';
 ///   feedbackType: OfflineFeedbackType.snackbar,
 ///   offlineMessage: 'Please check your internet connection',
 ///   child: Text('Smart Button'),
+/// )
+/// ```
+///
+/// Advanced usage with connectivity options:
+/// ```dart
+/// SmartButton(
+///   onPressed: () {
+///     print('Connected action executed');
+///   },
+///   requireWiFi: true, // Only allow WiFi connections
+///   feedbackType: OfflineFeedbackType.snackbar,
+///   offlineMessage: 'Please connect to WiFi',
+///   child: Text('WiFi Only Button'),
 /// )
 /// ```

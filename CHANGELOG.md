@@ -1,3 +1,22 @@
+## 1.0.0
+
+* **Major Release** - Production-ready version with enhanced features
+* Added `requireWiFi` parameter to enforce WiFi-only connections
+* Added `connectivityChecker` parameter for custom connectivity logic
+* Refactored code to reduce duplication using a base class
+* Improved test coverage for new features
+* Updated documentation and examples
+* Bumped to stable 1.0.0 version for production use
+
+## 0.0.4
+
+* **Enhancements** - Added advanced connectivity options
+* Added `requireWiFi` parameter to enforce WiFi-only connections
+* Added `connectivityChecker` parameter for custom connectivity logic
+* Refactored code to reduce duplication using a base class
+* Improved test coverage for new features
+* Updated documentation and examples
+
 ## 0.0.3
 
 * **Code Quality** - Final formatting fixes

@@ -106,6 +106,33 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             
             const SizedBox(height: 40),
+            
+            // Example 4: SmartButton with WiFi requirement
+            SmartButton(
+              onPressed: _incrementCounter,
+              requireWiFi: true,
+              feedbackType: OfflineFeedbackType.dialog,
+              offlineTitle: 'WiFi Required',
+              offlineMessage: 'This feature requires a WiFi connection.',
+              child: const Text('WiFi Only Button'),
+            ),
+            
+            const SizedBox(height: 16),
+            
+            // Example 5: SmartButton with custom connectivity checker
+            SmartTextButton(
+              onPressed: _incrementCounter,
+              connectivityChecker: () async {
+                // Simulate custom connectivity check
+                // In a real app, you might check for specific API availability
+                return true; // Always connected in this example
+              },
+              feedbackType: OfflineFeedbackType.snackbar,
+              offlineMessage: 'Custom connectivity check failed.',
+              child: const Text('Custom Connectivity Button'),
+            ),
+            
+            const SizedBox(height: 40),
             const Text(
               'Try turning off your internet connection and pressing the buttons!',
               textAlign: TextAlign.center,

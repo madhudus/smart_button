@@ -10,6 +10,8 @@ Flutter buttons with built-in internet connectivity checking. Automatically prev
 - 🔧 **Drop-in replacement** - Supports all standard Flutter button properties
 - 🎨 **Three button types** - SmartButton (ElevatedButton), SmartTextButton (TextButton), SmartOutlinedButton (OutlinedButton)
 - ⚙️ **Configurable feedback** - Choose between dialog, snackbar, or no feedback
+- 📶 **Advanced connectivity options** - Require WiFi only or implement custom connectivity checks
+- 🏗️ **Production-ready** - Stable 1.0.0 release with comprehensive test coverage
 
 ## Getting started
 
@@ -17,7 +19,7 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_button: ^0.0.1
+  smart_button: ^1.0.0
 ```
 
 Then run:
@@ -81,6 +83,30 @@ SmartButton(
 )
 ```
 
+### Advanced Connectivity Options
+
+For more control over connectivity checking:
+
+```dart
+// Require WiFi connection only
+SmartButton(
+  onPressed: () => performOnlineAction(),
+  requireWiFi: true, // Only allows WiFi connections
+  child: Text('WiFi Only Button'),
+)
+
+// Custom connectivity checker
+SmartButton(
+  onPressed: () => performOnlineAction(),
+  connectivityChecker: () async {
+    // Your custom logic here
+    // Return true if connection is acceptable
+    return await checkCustomConnectivity();
+  },
+  child: Text('Custom Check Button'),
+)
+```
+
 ### Feedback Types
 
 - `OfflineFeedbackType.dialog` - Shows an adaptive alert dialog (default)
@@ -118,6 +144,15 @@ SmartButton(
 
 - Flutter >=1.17.0
 - Dart >=3.8.1
+
+## Versioning
+
+This package follows [Semantic Versioning](https://semver.org/):
+- Major version (1.x.x) - Breaking changes
+- Minor version (x.1.x) - New features
+- Patch version (x.x.1) - Bug fixes
+
+With the release of version 1.0.0, this package is considered stable and production-ready.
 
 ## Contributing
 

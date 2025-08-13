@@ -103,4 +103,24 @@ void main() {
       expect(OfflineFeedbackType.values.contains(OfflineFeedbackType.none), true);
     });
   });
+  
+  group('Connectivity Features Tests', () {
+    test('SmartButton works with custom connectivity checker', () async {
+      // Create a custom checker
+      Future<bool> customChecker() async {
+        return true;
+      }
+      
+      // Test that the custom checker is properly passed to the base class
+      final button = SmartButton(
+        onPressed: () {},
+        connectivityChecker: customChecker,
+        child: const Text('Test'),
+      );
+      
+      // We can't easily test the full flow in a unit test without complex widget testing
+      // but we can verify that the parameter is properly stored
+      expect(button.connectivityCheckerGetter, isNotNull);
+    });
+  });
 }
