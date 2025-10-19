@@ -1,12 +1,15 @@
-## 1.0.1
+## 1.0.2
 
 * **Documentation & Code Quality** - Improved pub.dev score
-* Fixed pubspec.yaml schema validation issue
-* Updated flutter configuration in pubspec.yaml
 * Added comprehensive dartdoc comments for all public API elements in BaseSmartButton
 * Fixed Dart formatting issues in base_smart_button.dart and smart_button_widget.dart
 * Improved documentation coverage from 45.7% to complete coverage of public APIs
 * Package now passes all static analysis checks with 0 warnings
+
+## 1.0.1
+
+* Fixed pubspec.yaml schema validation issue
+* Updated flutter configuration in pubspec.yaml
 
 ## 1.0.0
 
