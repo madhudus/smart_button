@@ -1,3 +1,8 @@
+## 1.0.1
+
+* Fixed pubspec.yaml schema validation issue
+* Updated flutter configuration in pubspec.yaml
+
 ## 1.0.0
 
 * **Major Release** - Production-ready version with enhanced features
