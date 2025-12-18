@@ -4,14 +4,14 @@ Flutter buttons with built-in internet connectivity checking. Automatically prev
 
 ## Features
 
-- 🌐 **Automatic connectivity checking** - Checks internet connection before executing button actions
-- 🚫 **Offline action prevention** - Prevents onPressed/onTap callbacks when no internet connection
-- 📱 **Adaptive feedback** - Shows platform-appropriate dialogs or snackbars when offline
-- 🔧 **Drop-in replacement** - Supports all standard Flutter button properties
-- 🎨 **Three button types** - SmartButton (ElevatedButton), SmartTextButton (TextButton), SmartOutlinedButton (OutlinedButton)
-- ⚙️ **Configurable feedback** - Choose between dialog, snackbar, or no feedback
-- 📶 **Advanced connectivity options** - Require WiFi only or implement custom connectivity checks
-- 🏗️ **Production-ready** - Stable 1.0.0 release with comprehensive test coverage
+- Automatic connectivity checking - Checks internet connection before executing button actions
+- Offline action prevention - Prevents onPressed/onTap callbacks when no internet connection
+- Adaptive feedback - Shows platform-appropriate dialogs or snackbars when offline
+- Drop-in replacement - Supports all standard Flutter button properties
+- Three button types - SmartButton (ElevatedButton), SmartTextButton (TextButton), SmartOutlinedButton (OutlinedButton)
+- Configurable feedback - Choose between dialog, snackbar, or no feedback
+- Advanced connectivity options - Require WiFi only or implement custom connectivity checks
+- Production-ready - Stable 1.0.0 release with comprehensive test coverage
 
 ## Getting started
 
@@ -19,7 +19,7 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_button: ^1.0.0
+  smart_button: ^1.0.3
 ```
 
 Then run:

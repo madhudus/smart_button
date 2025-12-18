@@ -1,3 +1,11 @@
+## 1.0.3
+
+* **Maintenance & Package Quality** - Updated documentation and configuration
+* Updated installation documentation to reflect current version
+* Updated LICENSE copyright year to 2024-2025
+* Removed incorrect .gitignore entry for pubspec.lock (following modern Dart best practices)
+* Verified package publication configuration with dry-run tests
+
 ## 1.0.2
 
 * **Documentation & Code Quality** - Improved pub.dev score

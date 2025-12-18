@@ -1,6 +1,6 @@
 name: smart_button
 description: "Flutter buttons with built-in internet connectivity checking. Automatically prevents actions and shows user feedback when offline."
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/madhudus/smart_button
 repository: https://github.com/madhudus/smart_button
 issue_tracker: https://github.com/madhudus/smart_button/issues
