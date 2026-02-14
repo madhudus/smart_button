@@ -1,3 +1,14 @@
+## 1.1.0
+
+* **New: SmartIconButton** - Connectivity-aware wrapper for Flutter's IconButton with full API support (icon, iconSize, tooltip, splashRadius, etc.)
+* **New: SmartFilledButton** - Connectivity-aware wrapper for Flutter's FilledButton (Material 3)
+* **New: SmartButtonTheme** - InheritedWidget for setting global defaults (feedbackType, offlineMessage, offlineTitle, requireWiFi, connectivityChecker) across all smart buttons in a subtree
+* **New: ConnectivityHandler** - Extracted shared connectivity logic into a reusable utility, reducing code duplication between BaseSmartButton and SmartIconButton
+* **Improved: Theme fallback system** - All connectivity parameters (feedbackType, offlineMessage, offlineTitle, requireWiFi, connectivityChecker) now resolve through a widget → theme → default fallback chain
+* **Improved: Comprehensive test suite** - Rewritten tests covering all 5 button types, connectivity blocking, dialog/snackbar/none feedback, onOfflineAction callbacks, onLongPress blocking, theme defaults, theme overrides, and nested themes
+* **Improved: README** - Added platform setup, SmartIconButton/SmartFilledButton/SmartButtonTheme docs, and troubleshooting section
+* **Improved: pubspec.yaml** - Added topics metadata for pub.dev discoverability
+
 ## 1.0.3
 
 * **Maintenance & Package Quality** - Updated documentation and configuration
@@ -56,7 +67,7 @@
 
 * **Initial Release** - Smart Button package for Flutter
 * Added `SmartButton` - ElevatedButton with connectivity checking
-* Added `SmartTextButton` - TextButton with connectivity checking  
+* Added `SmartTextButton` - TextButton with connectivity checking
 * Added `SmartOutlinedButton` - OutlinedButton with connectivity checking
 * Implemented automatic internet connectivity verification before button actions
 * Added configurable offline feedback options:
