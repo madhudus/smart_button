@@ -1,3 +1,4 @@
 build/
 *.iml
 firebase-debug.log
+.github/
