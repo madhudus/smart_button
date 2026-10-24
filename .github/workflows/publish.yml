@@ -1,6 +1,9 @@
 # Publishes to pub.dev when a version tag is pushed, e.g. `git tag v1.1.1`.
 # Requires automated publishing to be enabled on pub.dev with the tag
 # pattern `v{{version}}`: https://pub.dev/packages/smart_button/admin
+#
+# Actions are pinned to commit SHAs because the publish job can mint a pub.dev
+# OIDC token; Dependabot keeps the pins current.
 name: Publish to pub.dev
 
 on:
@@ -8,21 +11,17 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+' # tag-pattern on pub.dev: 'v{{version}}'
 
+permissions:
+  contents: read
+
 jobs:
-  publish:
+  # Runs format, analysis, and tests without access to the OIDC token.
+  verify:
     runs-on: ubuntu-latest
-    environment: pub.dev
-    permissions:
-      id-token: write # Required for authentication using OIDC
-      contents: read
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # Only used to configure the pub.dev OIDC credentials; the Flutter SDK
-      # below provides the `dart`/`flutter` commands.
-      - uses: dart-lang/setup-dart@v1
-
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
         with:
           channel: stable
           cache: true
@@ -38,6 +37,25 @@ jobs:
 
       - name: Run tests
         run: flutter test
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: pub.dev
+    permissions:
+      id-token: write # Required for authentication using OIDC
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Only used to configure the pub.dev OIDC credentials; the Flutter SDK
+      # below provides the `dart`/`flutter` commands.
+      - uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d # v1.8.1
+
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: stable
+          cache: true
 
       - name: Publish
         run: flutter pub publish --force
