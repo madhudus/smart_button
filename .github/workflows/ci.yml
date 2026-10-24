@@ -1,0 +1,55 @@
+# Runs format, analysis, tests, and a publish dry-run on pull requests and
+# pushes to master. Tests run on the latest stable Flutter and on the minimum
+# version allowed by pubspec.yaml (`flutter: ">=3.32.0"`).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Flutter ${{ matrix.sdk }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - sdk: stable
+            flutter-version: any # latest stable release
+          - sdk: minimum
+            flutter-version: 3.32.x
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
+        with:
+          channel: stable
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Formatter output differs across SDK versions, so only check on stable.
+      - name: Check formatting
+        if: matrix.sdk == 'stable'
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Publish dry-run
+        if: matrix.sdk == 'stable'
+        run: flutter pub publish --dry-run
