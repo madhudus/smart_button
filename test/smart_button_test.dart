@@ -136,6 +136,63 @@ void main() {
       expect(find.text('Snackbar message'), findsOneWidget);
     });
 
+    testWidgets('throwing checker is treated as offline and reported', (
+      WidgetTester tester,
+    ) async {
+      bool pressed = false;
+      bool offlineCalled = false;
+
+      await tester.pumpWidget(
+        buildTestApp(
+          SmartButton(
+            onPressed: () => pressed = true,
+            onOfflineAction: () => offlineCalled = true,
+            connectivityChecker: () async => throw StateError('ping failed'),
+            feedbackType: OfflineFeedbackType.snackbar,
+            offlineMessage: 'Snackbar message',
+            child: const Text('Tap'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isA<StateError>());
+      expect(pressed, isFalse);
+      expect(offlineCalled, isTrue);
+      expect(find.text('Snackbar message'), findsOneWidget);
+    });
+
+    testWidgets('repeated offline taps replace the snackbar, not queue it', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          SmartButton(
+            onPressed: () {},
+            connectivityChecker: alwaysOffline,
+            feedbackType: OfflineFeedbackType.snackbar,
+            offlineMessage: 'Snackbar message',
+            child: const Text('Tap'),
+          ),
+        ),
+      );
+
+      for (var i = 0; i < 3; i++) {
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pump();
+      }
+      await tester.pumpAndSettle();
+
+      expect(find.text('Snackbar message'), findsOneWidget);
+
+      // Dismissing it must not reveal queued duplicates.
+      await tester.tap(find.text('OK'));
+      await tester.pumpAndSettle();
+      expect(find.text('Snackbar message'), findsNothing);
+    });
+
     testWidgets('shows no feedback when offline + feedbackType.none', (
       WidgetTester tester,
     ) async {
@@ -784,6 +841,49 @@ void main() {
       expect(copied.offlineMessage, 'New');
       expect(copied.offlineTitle, 'Title');
       expect(copied.requireWiFi, true);
+    });
+
+    test('equal values are == and share a hashCode', () {
+      const a = SmartButtonThemeData(
+        feedbackType: OfflineFeedbackType.snackbar,
+        offlineMessage: 'Msg',
+        connectivityChecker: alwaysOnline,
+      );
+      const b = SmartButtonThemeData(
+        feedbackType: OfflineFeedbackType.snackbar,
+        offlineMessage: 'Msg',
+        connectivityChecker: alwaysOnline,
+      );
+
+      expect(a, equals(b));
+      expect(a.hashCode, b.hashCode);
+      expect(a, isNot(equals(a.copyWith(offlineTitle: 'Other'))));
+    });
+
+    test('updateShouldNotify only fires when data changes', () {
+      final theme = SmartButtonTheme(
+        data: const SmartButtonThemeData(offlineMessage: 'Msg'),
+        child: const SizedBox(),
+      );
+
+      expect(
+        theme.updateShouldNotify(
+          SmartButtonTheme(
+            data: const SmartButtonThemeData(offlineMessage: 'Msg'),
+            child: const SizedBox(),
+          ),
+        ),
+        isFalse,
+      );
+      expect(
+        theme.updateShouldNotify(
+          SmartButtonTheme(
+            data: const SmartButtonThemeData(offlineMessage: 'Changed'),
+            child: const SizedBox(),
+          ),
+        ),
+        isTrue,
+      );
     });
   });
 }

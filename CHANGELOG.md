@@ -1,3 +1,14 @@
+## 1.1.1
+
+* **Changed: Connectivity check failures are treated as offline** - If a custom `connectivityChecker` or the `connectivity_plus` plugin throws, the error is reported via `FlutterError.reportError` and the button follows the offline path (feedback is shown and `onOfflineAction` runs). Previously the error escaped the tap handler and neither callback ran
+* **Fixed: Repeated offline taps no longer queue snackbars** - A new offline snackbar replaces the visible one instead of stacking behind it
+* **Fixed: `SmartButtonTheme` rebuilds** - `SmartButtonThemeData` now implements `==` and `hashCode`, so dependent buttons only rebuild when theme values actually change
+* **Improved: Localized OK labels** - The offline dialog and snackbar actions use `MaterialLocalizations.okButtonLabel` instead of a hardcoded "OK"
+* **Improved: Shared connectivity flow** - Added `ConnectivityHandler.runIfConnected()`, used by all smart buttons, plus public `kDefaultOfflineMessage` and `kDefaultOfflineTitle` constants
+* **Improved: Library documentation** - The library-level doc comment is now attached to the library and shown by dartdoc
+* **Maintenance: Dependencies** - Updated `connectivity_plus` to `^7.3.2` and set the Flutter SDK constraint to `>=3.32.0` (matching the Dart `^3.8.1` requirement)
+* **Maintenance: Example is now published** - The `example/` directory is included in the package for pub.dev
+
 ## 1.1.0
 
 * **New: SmartIconButton** - Connectivity-aware wrapper for Flutter's IconButton with full API support (icon, iconSize, tooltip, splashRadius, etc.)

@@ -1,10 +1,3 @@
-export 'src/smart_button_widget.dart';
-export 'src/offline_feedback_type.dart';
-export 'src/base_smart_button.dart';
-export 'src/connectivity_handler.dart';
-export 'src/smart_icon_button.dart';
-export 'src/smart_button_theme.dart';
-
 /// SmartButton widgets with built-in connectivity checking.
 ///
 /// This library provides five button widgets that automatically check for
@@ -44,3 +37,11 @@ export 'src/smart_button_theme.dart';
 ///   child: Text('Smart Button'),
 /// )
 /// ```
+library;
+
+export 'src/smart_button_widget.dart';
+export 'src/offline_feedback_type.dart';
+export 'src/base_smart_button.dart';
+export 'src/connectivity_handler.dart';
+export 'src/smart_icon_button.dart';
+export 'src/smart_button_theme.dart';

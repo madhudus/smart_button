@@ -19,7 +19,7 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_button: ^1.1.0
+  smart_button: ^1.1.1
 ```
 
 Then run:

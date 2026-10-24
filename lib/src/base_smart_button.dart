@@ -3,13 +3,6 @@ import 'connectivity_handler.dart';
 import 'offline_feedback_type.dart';
 import 'smart_button_theme.dart';
 
-/// Default offline message used when neither the widget nor theme specifies one.
-const _kDefaultOfflineMessage =
-    'No internet connection available. Please check your connection and try again.';
-
-/// Default offline dialog title used when neither the widget nor theme specifies one.
-const _kDefaultOfflineTitle = 'Connection Error';
-
 /// Base class for smart buttons with connectivity checking.
 ///
 /// Provides shared connectivity-aware press/long-press handling for
@@ -114,85 +107,30 @@ abstract class BaseSmartButton extends StatelessWidget {
     return buildButton(context);
   }
 
-  /// Resolves [feedbackType] against the theme, falling back to [OfflineFeedbackType.dialog].
-  OfflineFeedbackType _resolveFeedbackType(BuildContext context) {
-    return feedbackType ??
-        SmartButtonTheme.of(context)?.feedbackType ??
-        OfflineFeedbackType.dialog;
-  }
-
-  /// Resolves [offlineMessage] against the theme.
-  String _resolveOfflineMessage(BuildContext context) {
-    return offlineMessage ??
-        SmartButtonTheme.of(context)?.offlineMessage ??
-        _kDefaultOfflineMessage;
-  }
-
-  /// Resolves [offlineTitle] against the theme.
-  String _resolveOfflineTitle(BuildContext context) {
-    return offlineTitle ??
-        SmartButtonTheme.of(context)?.offlineTitle ??
-        _kDefaultOfflineTitle;
-  }
-
-  /// Resolves [requireWiFi] against the theme.
-  bool _resolveRequireWiFi(BuildContext context) {
-    return requireWiFi ?? SmartButtonTheme.of(context)?.requireWiFi ?? false;
-  }
-
-  /// Resolves [connectivityChecker] against the theme.
-  Future<bool> Function()? _resolveConnectivityChecker(BuildContext context) {
-    return connectivityChecker ??
-        SmartButtonTheme.of(context)?.connectivityChecker;
-  }
-
   /// Handles button press events by checking connectivity first.
   ///
   /// If connected, calls [onPressed]. If offline, shows feedback
   /// based on [feedbackType] and calls [onOfflineAction].
-  Future<void> handlePress(BuildContext context) async {
-    final isConnected = await ConnectivityHandler.checkConnectivity(
-      connectivityChecker: _resolveConnectivityChecker(context),
-      requireWiFi: _resolveRequireWiFi(context),
-    );
-
-    if (isConnected) {
-      onPressed?.call();
-    } else {
-      if (context.mounted) {
-        await ConnectivityHandler.handleOfflineFeedback(
-          context,
-          feedbackType: _resolveFeedbackType(context),
-          offlineMessage: _resolveOfflineMessage(context),
-          offlineTitle: _resolveOfflineTitle(context),
-        );
-      }
-      onOfflineAction?.call();
-    }
-  }
+  Future<void> handlePress(BuildContext context) =>
+      _runIfConnected(context, onPressed);
 
   /// Handles button long-press events by checking connectivity first.
   ///
   /// If connected, calls [onLongPress]. If offline, shows feedback
   /// based on [feedbackType] and calls [onOfflineAction].
-  Future<void> handleLongPress(BuildContext context) async {
-    final isConnected = await ConnectivityHandler.checkConnectivity(
-      connectivityChecker: _resolveConnectivityChecker(context),
-      requireWiFi: _resolveRequireWiFi(context),
-    );
+  Future<void> handleLongPress(BuildContext context) =>
+      _runIfConnected(context, onLongPress);
 
-    if (isConnected) {
-      onLongPress?.call();
-    } else {
-      if (context.mounted) {
-        await ConnectivityHandler.handleOfflineFeedback(
-          context,
-          feedbackType: _resolveFeedbackType(context),
-          offlineMessage: _resolveOfflineMessage(context),
-          offlineTitle: _resolveOfflineTitle(context),
-        );
-      }
-      onOfflineAction?.call();
-    }
+  Future<void> _runIfConnected(BuildContext context, VoidCallback? action) {
+    return ConnectivityHandler.runIfConnected(
+      context,
+      action: action,
+      onOfflineAction: onOfflineAction,
+      feedbackType: feedbackType,
+      offlineMessage: offlineMessage,
+      offlineTitle: offlineTitle,
+      requireWiFi: requireWiFi,
+      connectivityChecker: connectivityChecker,
+    );
   }
 }

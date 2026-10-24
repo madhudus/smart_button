@@ -174,33 +174,16 @@ class SmartIconButton extends StatelessWidget {
     );
   }
 
-  Future<void> _handlePress(BuildContext context) async {
-    final theme = SmartButtonTheme.of(context);
-    final resolvedChecker = connectivityChecker ?? theme?.connectivityChecker;
-    final resolvedRequireWiFi = requireWiFi ?? theme?.requireWiFi ?? false;
-
-    final isConnected = await ConnectivityHandler.checkConnectivity(
-      connectivityChecker: resolvedChecker,
-      requireWiFi: resolvedRequireWiFi,
+  Future<void> _handlePress(BuildContext context) {
+    return ConnectivityHandler.runIfConnected(
+      context,
+      action: onPressed,
+      onOfflineAction: onOfflineAction,
+      feedbackType: feedbackType,
+      offlineMessage: offlineMessage,
+      offlineTitle: offlineTitle,
+      requireWiFi: requireWiFi,
+      connectivityChecker: connectivityChecker,
     );
-
-    if (isConnected) {
-      onPressed?.call();
-    } else {
-      if (context.mounted) {
-        await ConnectivityHandler.handleOfflineFeedback(
-          context,
-          feedbackType:
-              feedbackType ?? theme?.feedbackType ?? OfflineFeedbackType.dialog,
-          offlineMessage:
-              offlineMessage ??
-              theme?.offlineMessage ??
-              'No internet connection available. Please check your connection and try again.',
-          offlineTitle:
-              offlineTitle ?? theme?.offlineTitle ?? 'Connection Error',
-        );
-      }
-      onOfflineAction?.call();
-    }
   }
 }

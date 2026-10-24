@@ -59,6 +59,26 @@ class SmartButtonThemeData {
       connectivityChecker: connectivityChecker ?? this.connectivityChecker,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is SmartButtonThemeData &&
+        other.feedbackType == feedbackType &&
+        other.offlineMessage == offlineMessage &&
+        other.offlineTitle == offlineTitle &&
+        other.requireWiFi == requireWiFi &&
+        other.connectivityChecker == connectivityChecker;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    feedbackType,
+    offlineMessage,
+    offlineTitle,
+    requireWiFi,
+    connectivityChecker,
+  );
 }
 
 /// An inherited widget that provides [SmartButtonThemeData] to descendant
