@@ -1,6 +1,6 @@
 # Runs format, analysis, tests, and a publish dry-run on pull requests and
 # pushes to master. Tests run on the latest stable Flutter and on the minimum
-# version allowed by pubspec.yaml (`flutter: ">=3.32.0"`).
+# version allowed by pubspec.yaml (`flutter: ">=3.47.0"`).
 name: CI
 
 on:
@@ -26,7 +26,7 @@ jobs:
           - sdk: stable
             flutter-version: any # latest stable release
           - sdk: minimum
-            flutter-version: 3.32.x
+            flutter-version: 3.47.x
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
