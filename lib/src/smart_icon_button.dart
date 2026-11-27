@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'connectivity_handler.dart';
 import 'offline_feedback_type.dart';
 import 'smart_button_theme.dart';

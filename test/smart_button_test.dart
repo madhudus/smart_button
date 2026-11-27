@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_button/smart_button.dart';
 
@@ -163,6 +163,45 @@ void main() {
       expect(offlineCalled, isTrue);
       expect(find.text('Snackbar message'), findsOneWidget);
     });
+
+    testWidgets(
+      'snackbar feedback without a ScaffoldMessenger still runs onOfflineAction',
+      (WidgetTester tester) async {
+        bool offlineCalled = false;
+
+        // No MaterialApp, so there is no ScaffoldMessenger ancestor.
+        await tester.pumpWidget(
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Localizations(
+              locale: const Locale('en'),
+              delegates: const [
+                DefaultMaterialLocalizations.delegate,
+                DefaultWidgetsLocalizations.delegate,
+              ],
+              child: MediaQuery(
+                data: const MediaQueryData(),
+                child: Material(
+                  child: SmartButton(
+                    onPressed: () {},
+                    onOfflineAction: () => offlineCalled = true,
+                    connectivityChecker: alwaysOffline,
+                    feedbackType: OfflineFeedbackType.snackbar,
+                    child: const Text('Tap'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(ElevatedButton));
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), isNull);
+        expect(offlineCalled, isTrue);
+      },
+    );
 
     testWidgets('repeated offline taps replace the snackbar, not queue it', (
       WidgetTester tester,

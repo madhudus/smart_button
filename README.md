@@ -19,8 +19,10 @@ Add this package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_button: ^1.1.1
+  smart_button: ^2.0.0
 ```
+
+Version 2 is built on `package:material_ui`, so your app must use `MaterialApp` and `Scaffold` from `material_ui` too. An app still on `package:flutter/material.dart` should stay on `smart_button: ^1.1.1` until it migrates (`dart fix --apply --code=migrate_design_widgets`).
 
 Then run:
 ```bash
@@ -230,8 +232,9 @@ Ensure `SmartButtonTheme` is placed above the buttons in the widget tree. Use `S
 
 ## Requirements
 
-- Flutter >=1.17.0
-- Dart >=3.8.1
+- Flutter >=3.47.0
+- Dart >=3.13.0
+- An app built on `package:material_ui`
 
 ## Versioning
 
