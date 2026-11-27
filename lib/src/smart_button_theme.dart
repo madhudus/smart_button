@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'offline_feedback_type.dart';
 
 /// Theme data class holding default values for smart buttons.

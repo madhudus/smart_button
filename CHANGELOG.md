@@ -1,5 +1,7 @@
-## Unreleased
+## 2.0.0
 
+* **BREAKING: Built on `package:material_ui`** - Flutter 3.47 deprecates `package:flutter/material.dart` in favour of the standalone `material_ui` package, and the buttons now import it. `material_ui` has its own `Material`, `Theme` and `ScaffoldMessenger`, so the buttons only work in an app that uses `material_ui` as well. In an app still on `package:flutter/material.dart` they fail with "No Material widget found" and the offline snackbar is not shown. Migrate the app with `dart fix --apply --code=migrate_design_widgets`, or stay on 1.1.1
+* **BREAKING: Minimum Flutter 3.47.0 and Dart 3.13.0**, the lowest that `material_ui` supports
 * **Fixed: Snackbar feedback without a `ScaffoldMessenger`** - Under a `CupertinoApp` or `WidgetsApp`, an offline tap with `OfflineFeedbackType.snackbar` threw `No ScaffoldMessenger widget found` and `onOfflineAction` never ran. The snackbar is now skipped and `onOfflineAction` still runs
 * **Maintenance: Less duplication** - The four `child`-based buttons share `pressCallback()`/`longPressCallback()` from `BaseSmartButton` instead of repeating the same null-check wiring
 
