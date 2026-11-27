@@ -157,8 +157,14 @@ class ConnectivityHandler {
     BuildContext context, {
     required String message,
   }) {
+    // Without a ScaffoldMessenger (e.g. under a CupertinoApp or WidgetsApp)
+    // there is nowhere to show the snackbar. Skip it rather than throw, so
+    // `onOfflineAction` still runs.
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    if (messenger == null) return;
+
     // Replace any visible offline snackbar instead of queueing one per tap.
-    ScaffoldMessenger.of(context)
+    messenger
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(

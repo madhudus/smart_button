@@ -34,8 +34,8 @@ class SmartButton extends BaseSmartButton {
   @override
   Widget buildButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed != null ? () => handlePress(context) : null,
-      onLongPress: onLongPress != null ? () => handleLongPress(context) : null,
+      onPressed: pressCallback(context),
+      onLongPress: longPressCallback(context),
       onHover: onHover,
       onFocusChange: onFocusChange,
       style: style,
@@ -81,8 +81,8 @@ class SmartTextButton extends BaseSmartButton {
   @override
   Widget buildButton(BuildContext context) {
     return TextButton(
-      onPressed: onPressed != null ? () => handlePress(context) : null,
-      onLongPress: onLongPress != null ? () => handleLongPress(context) : null,
+      onPressed: pressCallback(context),
+      onLongPress: longPressCallback(context),
       onHover: onHover,
       onFocusChange: onFocusChange,
       style: style,
@@ -128,8 +128,8 @@ class SmartOutlinedButton extends BaseSmartButton {
   @override
   Widget buildButton(BuildContext context) {
     return OutlinedButton(
-      onPressed: onPressed != null ? () => handlePress(context) : null,
-      onLongPress: onLongPress != null ? () => handleLongPress(context) : null,
+      onPressed: pressCallback(context),
+      onLongPress: longPressCallback(context),
       onHover: onHover,
       onFocusChange: onFocusChange,
       style: style,
@@ -175,8 +175,8 @@ class SmartFilledButton extends BaseSmartButton {
   @override
   Widget buildButton(BuildContext context) {
     return FilledButton(
-      onPressed: onPressed != null ? () => handlePress(context) : null,
-      onLongPress: onLongPress != null ? () => handleLongPress(context) : null,
+      onPressed: pressCallback(context),
+      onLongPress: longPressCallback(context),
       onHover: onHover,
       onFocusChange: onFocusChange,
       style: style,

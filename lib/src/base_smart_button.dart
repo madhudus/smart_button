@@ -121,6 +121,18 @@ abstract class BaseSmartButton extends StatelessWidget {
   Future<void> handleLongPress(BuildContext context) =>
       _runIfConnected(context, onLongPress);
 
+  /// The `onPressed` callback to hand to the wrapped Flutter button: runs
+  /// [handlePress], or is null (disabling the button) when [onPressed] is null.
+  @protected
+  VoidCallback? pressCallback(BuildContext context) =>
+      onPressed == null ? null : () => handlePress(context);
+
+  /// The `onLongPress` callback to hand to the wrapped Flutter button: runs
+  /// [handleLongPress], or is null when [onLongPress] is null.
+  @protected
+  VoidCallback? longPressCallback(BuildContext context) =>
+      onLongPress == null ? null : () => handleLongPress(context);
+
   Future<void> _runIfConnected(BuildContext context, VoidCallback? action) {
     return ConnectivityHandler.runIfConnected(
       context,

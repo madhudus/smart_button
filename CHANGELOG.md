@@ -1,3 +1,8 @@
+## Unreleased
+
+* **Fixed: Snackbar feedback without a `ScaffoldMessenger`** - Under a `CupertinoApp` or `WidgetsApp`, an offline tap with `OfflineFeedbackType.snackbar` threw `No ScaffoldMessenger widget found` and `onOfflineAction` never ran. The snackbar is now skipped and `onOfflineAction` still runs
+* **Maintenance: Less duplication** - The four `child`-based buttons share `pressCallback()`/`longPressCallback()` from `BaseSmartButton` instead of repeating the same null-check wiring
+
 ## 1.1.1
 
 * **Changed: Connectivity check failures are treated as offline** - If a custom `connectivityChecker` or the `connectivity_plus` plugin throws, the error is reported via `FlutterError.reportError` and the button follows the offline path (feedback is shown and `onOfflineAction` runs). Previously the error escaped the tap handler and neither callback ran
